@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen>
         height: _size.height * .75,
         child: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (overScroll) {
-            overScroll.disallowGlow();
+            overScroll.disallowIndicator();
             return true;
           },
           child: ScrollSnapList(
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen>
       margin: EdgeInsets.symmetric(horizontal: 32),
       child: Align(
         alignment: Alignment.topCenter,
-        child: FlatButton(
+        child: MaterialButton(
           color: AppColor.primary,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

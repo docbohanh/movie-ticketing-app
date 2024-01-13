@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class VideoClipper extends CustomClipper<Path> {
   double curveValue;
 
-  VideoClipper({this.curveValue});
+  VideoClipper({required this.curveValue});
 
   @override
   Path getClip(Size size) {

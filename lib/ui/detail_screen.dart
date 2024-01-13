@@ -9,7 +9,7 @@ class DetailScreen extends StatefulWidget {
   final MovieModel movie;
   final Size size;
 
-  DetailScreen({this.movie, this.size});
+  DetailScreen({required this.movie, required this.size});
 
   @override
   _DetailScreenState createState() => _DetailScreenState();
@@ -18,11 +18,11 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen>
     with TickerProviderStateMixin {
   Size get _size => MediaQuery.of(context).size;
-  RubberAnimationController _rubberSheetAnimationController;
-  ScrollController _rubberSheetScrollController;
+  late RubberAnimationController _rubberSheetAnimationController;
+  late ScrollController _rubberSheetScrollController;
 
-  VideoPlayerController _moviePlayerController;
-  VideoPlayerController _reflectionPlayerController;
+  late VideoPlayerController _moviePlayerController;
+  late VideoPlayerController _reflectionPlayerController;
 
   @override
   void initState() {
@@ -83,7 +83,7 @@ class _DetailScreenState extends State<DetailScreen>
         width: _size.width * .9,
         height: _size.height * .08,
         margin: EdgeInsets.symmetric(vertical: _size.width * .05),
-        child: FlatButton(
+        child: MaterialButton(
           color: Colors.black,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

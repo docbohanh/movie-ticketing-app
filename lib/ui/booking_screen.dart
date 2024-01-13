@@ -9,10 +9,11 @@ class BookingScreen extends StatefulWidget {
   final VideoPlayerController reflectionPlayerController;
   final String movieName;
 
-  BookingScreen(
-      {this.moviePlayerController,
-      this.reflectionPlayerController,
-      this.movieName});
+  BookingScreen({
+    required this.moviePlayerController,
+    required this.reflectionPlayerController,
+    required this.movieName,
+  });
 
   @override
   _BookingScreenState createState() => _BookingScreenState();
@@ -21,26 +22,26 @@ class BookingScreen extends StatefulWidget {
 class _BookingScreenState extends State<BookingScreen>
     with TickerProviderStateMixin {
   Size get _size => MediaQuery.of(context).size;
-  List<AnimationController> _dateSelectorACList = List();
-  List<Animation<double>> _dateSelectorTweenList = List();
+  List<AnimationController> _dateSelectorACList = [];
+  List<Animation<double>> _dateSelectorTweenList = [];
 
-  List<AnimationController> _timeSelectorACList = List();
-  List<Animation<double>> _timeSelectorTweenList = List();
+  List<AnimationController> _timeSelectorACList = [];
+  List<Animation<double>> _timeSelectorTweenList = [];
 
-  AnimationController _dateBackgroundAc;
-  Animation<double> _dateBackgroundTween;
+  late AnimationController _dateBackgroundAc;
+  late Animation<double> _dateBackgroundTween;
 
-  AnimationController _cinemaScreenAc;
-  Animation<double> _cinemaScreenTween;
+  late AnimationController _cinemaScreenAc;
+  late Animation<double> _cinemaScreenTween;
 
-  AnimationController _reflectionAc;
-  Animation<double> _reflectionTween;
+  late AnimationController _reflectionAc;
+  late Animation<double> _reflectionTween;
 
-  AnimationController _payButtonAc;
-  Animation<double> _payButtonTween;
+  late AnimationController _payButtonAc;
+  late Animation<double> _payButtonTween;
 
-  AnimationController _cinemaChairAc;
-  Animation<double> _cinemaChairTween;
+  late AnimationController _cinemaChairAc;
+  late Animation<double> _cinemaChairTween;
 
   int _dateIndexSelected = 1;
   int _timeIndexSelected = 1;
@@ -174,7 +175,7 @@ class _BookingScreenState extends State<BookingScreen>
                 width: MediaQuery.of(context).size.width * .8,
                 height: 800,
                 child: Center(
-                  child: widget.reflectionPlayerController.value.initialized
+                  child: widget.reflectionPlayerController.value.isInitialized
                       ? AnimatedBuilder(
                           animation: _reflectionAc,
                           builder: (ctx, child) {
@@ -210,7 +211,7 @@ class _BookingScreenState extends State<BookingScreen>
                     width: MediaQuery.of(context).size.width * .8,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [Colors.grey[300], Colors.transparent],
+                        colors: [Colors.grey.shade300, Colors.transparent],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         stops: [0, 1],
@@ -239,7 +240,7 @@ class _BookingScreenState extends State<BookingScreen>
                 child: Column(
                   children: <Widget>[
                     Center(
-                      child: widget.moviePlayerController.value.initialized
+                      child: widget.moviePlayerController.value.isInitialized
                           ? AnimatedBuilder(
                               animation: _cinemaScreenAc,
                               builder: (ctx, child) {
@@ -303,14 +304,14 @@ class _BookingScreenState extends State<BookingScreen>
                 children: <Widget>[
                   _chairCategory(Colors.white, "FREE"),
                   _chairCategory(AppColor.primary, "YOURS"),
-                  _chairCategory(Colors.grey[700], "RESERVED"),
-                  _chairCategory(Colors.red[800], "NOT AVAILABLE"),
+                  _chairCategory(Colors.grey.shade700, "RESERVED"),
+                  _chairCategory(Colors.red.shade800, "NOT AVAILABLE"),
                 ],
               ),
             ),
             Container(
               margin: EdgeInsets.only(left: 32, right: 32, bottom: 8),
-              child: FlatButton(
+              child: MaterialButton(
                 color: AppColor.primary,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12)),
@@ -446,7 +447,7 @@ class _BookingScreenState extends State<BookingScreen>
                       _timeIndexSelected = index;
                     });
                   },
-                  child: _timeItem(time[index][0], time[index][1],
+                  child: _timeItem(time[index][0].toString(), int.parse(time[index][1].toString()),
                       index == _timeIndexSelected ? true : false),
                 ),
               ),
